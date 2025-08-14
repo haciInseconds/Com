@@ -105,6 +105,14 @@
       const body = encodeURIComponent(bodyContent);
       window.open(`https://github.com/${GH_USER}/${GH_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
     });
+    document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i')) {
+    e.preventDefault();
+  }
+});
+
   </script>
 </body>
 </html>
+
