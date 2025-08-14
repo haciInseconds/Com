@@ -11,7 +11,7 @@
   <meta name="author" content="HackInSecond">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph for Social Media -->
+  <!-- Open Graph -->
   <meta property="og:title" content="HackInSecond - Automation & Tech Solutions">
   <meta property="og:description" content="AI Automation, Analytics & Global Projects for Businesses.">
   <meta property="og:image" content="channels4_profile.jpg">
@@ -32,8 +32,12 @@
 <body class="theme-light font-sans">
 
   <!-- Theme Toggle -->
-  <div class="fixed top-4 right-4 z-50">
-    <button id="themeToggle" aria-label="Toggle Theme" class="px-4 py-2 bg-gray-800 text-white rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-500">Toggle Theme</button>
+  <div class="fixed top-4 right-4 z-50 flex gap-2">
+    <button id="themeToggle" aria-label="Toggle Theme" class="px-4 py-2 bg-gray-800 text-white rounded shadow">Toggle Theme</button>
+    <!-- Mobile Menu Button -->
+    <button id="menuToggle" aria-label="Toggle Menu" class="px-4 py-2 bg-blue-600 text-white rounded shadow md:hidden">
+      <i class="fas fa-bars"></i>
+    </button>
   </div>
 
   <!-- Hero Section -->
@@ -43,16 +47,16 @@
     <p class="text-xl mb-6">Automation & Tech Solutions for Businesses</p>
     <nav aria-label="Social Links">
       <div class="flex justify-center space-x-6 text-3xl">
-        <a href="https://x.com/@hackinseconds" aria-label="Visit our Twitter profile" class="hover:text-blue-300"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://www.linkedin.com/in/hackinseconds-hcl-61b215377/" aria-label="Visit our LinkedIn profile" class="hover:text-blue-200"><i class="fab fa-linkedin"></i></a>
-        <a href="https://youtube.com/@hackinseconds" aria-label="Visit our YouTube channel" class="hover:text-red-400"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/@hackinseconds" aria-label="Twitter" class="hover:text-blue-300"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/hackinseconds-hcl-61b215377/" aria-label="LinkedIn" class="hover:text-blue-200"><i class="fab fa-linkedin"></i></a>
+        <a href="https://youtube.com/@hackinseconds" aria-label="YouTube" class="hover:text-red-400"><i class="fab fa-youtube"></i></a>
       </div>
     </nav>
   </header>
 
   <!-- Navigation -->
-  <nav class="bg-gray-100 py-4 sticky top-0 z-40 shadow" aria-label="Main Navigation">
-    <ul class="flex flex-wrap justify-center space-x-6 sm:space-x-8 text-gray-700 font-medium">
+  <nav class="bg-gray-100 shadow sticky top-0 z-40" aria-label="Main Navigation">
+    <ul id="mainMenu" class="hidden md:flex justify-center space-x-6 sm:space-x-8 text-gray-700 font-medium py-4 md:py-4 flex-col md:flex-row md:space-y-0 space-y-4 md:space-x-8">
       <li><a href="#Home" class="hover:text-blue-600">Home</a></li>
       <li><a href="#About" class="hover:text-blue-600">About</a></li>
       <li><a href="#mission" class="hover:text-blue-600">Mission</a></li>
@@ -151,13 +155,20 @@
   </footer>
 
   <script>
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
+    // Theme Toggle
+    document.getElementById('themeToggle').addEventListener('click', () => {
       document.body.classList.toggle('theme-dark');
       document.body.classList.toggle('theme-light');
     });
 
-    // Basic protection: Disable right-click & inspect
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+    menuToggle.addEventListener('click', () => {
+      mainMenu.classList.toggle('hidden');
+    });
+
+    // Disable Right Click & Inspect
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = function(e) {
       if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
