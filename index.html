@@ -4,11 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HackInSecond - Automation & Tech Solutions</title>
+
+  <!-- SEO Meta -->
   <meta name="description" content="HackInSecond - AI Automation, Analytics, and Global Tech Projects for businesses. Save time and increase revenue with cutting-edge solutions.">
-  <meta name="keywords" content="automation, AI, business automation, analytics, tech solutions, HackInSecond">
+  <meta name="keywords" content="HackInSecond, automation, AI, analytics, business automation, tech solutions">
   <meta name="author" content="HackInSecond">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph for Social Media -->
+  <meta property="og:title" content="HackInSecond - Automation & Tech Solutions">
+  <meta property="og:description" content="AI Automation, Analytics & Global Projects for Businesses.">
+  <meta property="og:image" content="channels4_profile.jpg">
+  <meta property="og:url" content="https://haciinseconds.github.io/Com/#Contact">
+  <meta name="twitter:card" content="summary_large_image">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     body { transition: background 0.3s, color 0.3s; }
     .theme-light { background: #f9fafb; color: #1f2937; }
@@ -21,23 +33,25 @@
 
   <!-- Theme Toggle -->
   <div class="fixed top-4 right-4 z-50">
-    <button id="themeToggle" aria-label="Toggle Theme" class="px-4 py-2 bg-gray-800 text-white rounded shadow">Toggle Theme</button>
+    <button id="themeToggle" aria-label="Toggle Theme" class="px-4 py-2 bg-gray-800 text-white rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-500">Toggle Theme</button>
   </div>
 
   <!-- Hero Section -->
   <header class="py-20 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-    <img src="channels4_profile.jpg" alt="HackInSecond Logo" class="mx-auto w-40 h-40 object-contain mb-6 rounded-full border-4 border-white">
+    <img src="channels4_profile.jpg" loading="lazy" alt="HackInSecond Company Logo" class="mx-auto w-40 h-40 object-contain mb-6 rounded-full border-4 border-white">
     <h1 class="text-5xl font-bold mb-2">HackInSecond</h1>
     <p class="text-xl mb-6">Automation & Tech Solutions for Businesses</p>
-    <div class="flex justify-center space-x-6 text-3xl">
-      <a href="https://x.com/@hackinseconds" aria-label="Twitter" class="hover:text-blue-300"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://www.linkedin.com/in/hackinseconds-hcl-61b215377/" aria-label="LinkedIn" class="hover:text-blue-200"><i class="fab fa-linkedin"></i></a>
-      <a href="https://youtube.com/@hackinseconds" aria-label="YouTube" class="hover:text-red-400"><i class="fab fa-youtube"></i></a>
-    </div>
+    <nav aria-label="Social Links">
+      <div class="flex justify-center space-x-6 text-3xl">
+        <a href="https://x.com/@hackinseconds" aria-label="Visit our Twitter profile" class="hover:text-blue-300"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/hackinseconds-hcl-61b215377/" aria-label="Visit our LinkedIn profile" class="hover:text-blue-200"><i class="fab fa-linkedin"></i></a>
+        <a href="https://youtube.com/@hackinseconds" aria-label="Visit our YouTube channel" class="hover:text-red-400"><i class="fab fa-youtube"></i></a>
+      </div>
+    </nav>
   </header>
 
   <!-- Navigation -->
-  <nav class="bg-gray-100 py-4 sticky top-0 z-40 shadow">
+  <nav class="bg-gray-100 py-4 sticky top-0 z-40 shadow" aria-label="Main Navigation">
     <ul class="flex flex-wrap justify-center space-x-6 sm:space-x-8 text-gray-700 font-medium">
       <li><a href="#Home" class="hover:text-blue-600">Home</a></li>
       <li><a href="#About" class="hover:text-blue-600">About</a></li>
@@ -65,21 +79,21 @@
         Empower society with innovative tech projects in education, healthcare, and business automation.
       </p>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
-          <i class="fas fa-robot text-5xl text-blue-600 mb-6"></i>
+        <article class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+          <i class="fas fa-robot text-5xl text-blue-600 mb-6" aria-hidden="true"></i>
           <h3 class="text-xl font-semibold text-gray-800 mb-3">AI Automation</h3>
           <p class="text-gray-600">Smart automation systems to increase business efficiency.</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
-          <i class="fas fa-chart-line text-5xl text-green-600 mb-6"></i>
+        </article>
+        <article class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+          <i class="fas fa-chart-line text-5xl text-green-600 mb-6" aria-hidden="true"></i>
           <h3 class="text-xl font-semibold text-gray-800">Analytics Tools</h3>
           <p class="text-gray-600">Data-driven insights to grow your business quickly.</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
-          <i class="fas fa-globe text-5xl text-purple-600 mb-6"></i>
+        </article>
+        <article class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
+          <i class="fas fa-globe text-5xl text-purple-600 mb-6" aria-hidden="true"></i>
           <h3 class="text-xl font-semibold text-gray-800 mb-3">Global Projects</h3>
           <p class="text-gray-600">Connecting communities worldwide with technology.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -88,14 +102,14 @@
   <section id="project" class="max-w-6xl mx-auto py-20 px-6">
     <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">Our Projects</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col">
-        <img src="https://hawksem.com/wp-content/uploads/2021/01/Google-Ads-homepage-1-1024x499.png" alt="Smart Ad Manager Project" class="w-full object-cover">
+      <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col">
+        <img src="https://hawksem.com/wp-content/uploads/2021/01/Google-Ads-homepage-1-1024x499.png" loading="lazy" alt="Smart Ad Manager Project Screenshot" class="w-full object-cover">
         <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-xl font-semibold text-gray-800">Smart Ad Manager</h3>
           <p class="text-gray-600 mb-4 flex-grow">Automates ad placement and optimization using AI analytics.</p>
           <a href="#" class="text-blue-600 font-medium hover:underline mt-auto">View Details →</a>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 
@@ -104,17 +118,17 @@
     <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">Our Team</h2>
     <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
       <div>
-        <img src="team1.jpg" alt="Team Member 1" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        <img src="team1.jpg" loading="lazy" alt="John Doe - CEO & Founder" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
         <h3 class="text-lg font-semibold">John Doe</h3>
         <p class="text-gray-500">CEO & Founder</p>
       </div>
       <div>
-        <img src="team2.jpg" alt="Team Member 2" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        <img src="team2.jpg" loading="lazy" alt="Jane Smith - Lead Developer" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
         <h3 class="text-lg font-semibold">Jane Smith</h3>
         <p class="text-gray-500">Lead Developer</p>
       </div>
       <div>
-        <img src="team3.jpg" alt="Team Member 3" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        <img src="team3.jpg" loading="lazy" alt="Mike Johnson - Project Manager" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
         <h3 class="text-lg font-semibold">Mike Johnson</h3>
         <p class="text-gray-500">Project Manager</p>
       </div>
@@ -136,7 +150,6 @@
     &copy; 2025 HackInSecond. All rights reserved.
   </footer>
 
-  <!-- JS -->
   <script>
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
@@ -144,7 +157,7 @@
       document.body.classList.toggle('theme-light');
     });
 
-    // Disable right-click and inspect
+    // Basic protection: Disable right-click & inspect
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = function(e) {
       if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
