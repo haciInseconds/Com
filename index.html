@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HackInSecond - Official</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      transition: background 0.3s, color 0.3s;
+    }
+    .theme-light { background: #f9fafb; color: #1f2937; }
+    .theme-dark { background: #111827; color: #f3f4f6; }
+    .ad-space {
+      border: 2px dashed #9ca3af;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 0.75rem;
+      background-color: rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body class="theme-light font-sans">
+  <!-- Theme Toggle -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="themeToggle" class="px-4 py-2 bg-gray-800 text-white rounded shadow">Toggle Theme</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="py-20 text-center">
+    <img src="channels4_profile.jpg" alt="HackInSecond Logo" class="mx-auto w-40 h-40 object-contain mb-6">
+    <h1 class="text-4xl font-bold mb-2">HackInSecond</h1>
+    <p class="text-lg text-gray-500">Automation businesses</p>
+    <div class="mt-6 flex justify-center space-x-6 text-2xl">
+      <a href="https://x.com/@hackinseconds" class="hover:text-blue-500"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/hackinseconds-hcl-61b215377/" class="hover:text-blue-700"><i class="fab fa-linkedin"></i></a>
+      <a href="https://youtube.com/@hackinseconds" class="hover:text-red-600"><i class="fab fa-youtube"></i></a>
+    </div>
+  </section>
+  <section> 
+ 
+  <nav style="text-align: center; text-emphasis-color: #999;">
+   <a href="#Home"><lu>Home</lu></a>
+   <a href="#About"><lu>About</lu></a>
+   <a href="#mission"><lu>Mission</lu></a>
+   <a href="#project"><lu>Project</lu></a>
+   <a href="#contact"><lu>Contact</lu></a>
+  </nav>
+  </section>
+
+  <!-- About -->
+  <section id ="About" class="max-w-4xl mx-auto py-16 px-6">
+    <h2 class="text-3xl font-bold mb-4">About Us</h2>
+    <p class="leading-relaxed text-lg">
+      HackInSecond is a cutting-edge automation company helping businesses save time and increase revenue through seamless workflows.
+      We specialize in creating platforms that let you place ads, manage campaigns, and reach your audience instantly. Our mission is simple:
+      automation at the speed of thought.
+    </p>
+  </section>
+
+  <!-- Ad Placement -->
+  <section id="mission">
+    <div class="max-w-4xl mx-auto">
+       <h2 class="text-3xl font-bold mb-4">OUR MISSION</h2><br>
+       <p>
+        The goal of these free projects is to empower various segments of society in areas like education, health, and technology.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id = "Contact" class="max-w-4xl mx-auto py-16 px-6">
+    <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+    <form id="contactForm" class="grid gap-4">
+      <input type="text" id="name" placeholder="Your Name" class="p-3 rounded border" required>
+      <input type="email" id="email" placeholder="Your Email" class="p-3 rounded border" required>
+      <textarea id="message" placeholder="Your Message" class="p-3 rounded border h-32" required></textarea>
+      <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">Send Message</button>
+    </form>
+  </section>
+
+  <footer class="py-6 text-center text-gray-500 border-t">
+    &copy; 2025 HackInSecond. All rights reserved.
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('theme-dark');
+      body.classList.toggle('theme-light');
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const GH_USER = 'YOUR_GITHUB';
+      const GH_REPO = 'YOUR_REPO';
+      const title = encodeURIComponent(`Ad Inquiry from ${name}`);
+      const bodyContent = `**Name:** ${name}\n**Email:** ${email}\n**Message:** ${message}`;
+      const body = encodeURIComponent(bodyContent);
+      window.open(`https://github.com/${GH_USER}/${GH_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
+    });
+  </script>
+</body>
+</html>
