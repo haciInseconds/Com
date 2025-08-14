@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdn.tailwindcss.com; font-src https://cdnjs.cloudflare.com;">
   <title>HackInSecond - Official</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -109,6 +108,27 @@
     .then(() => alert('Thank you! Your message was sent.'))
     .catch(() => alert('Something went wrong.'));
   });
+
+        const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('theme-dark');
+      body.classList.toggle('theme-light');
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const GH_USER = 'YOUR_GITHUB';
+      const GH_REPO = 'YOUR_REPO';
+      const title = encodeURIComponent(`Ad Inquiry from ${name}`);
+      const bodyContent = `**Name:** ${name}\n**Email:** ${email}\n**Message:** ${message}`;
+      const body = encodeURIComponent(bodyContent);
+      window.open(`https://github.com/${GH_USER}/${GH_REPO}/issues/new?title=${title}&body=${body}`, '_blank');
+    });
 
     document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
