@@ -1,268 +1,379 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EaseRoot - Marketplace</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HackInSeconds — Secure Digital Future</title>
+<meta name="description" content="HackInSeconds — security-first digital platform. Trusted, fast & future-ready."/>
+<style>
+/* =========================
+   HackInSeconds - Single File Landing Page (All CSS inline)
+   Responsive, modern, subtle animation
+   ========================= */
+:root{
+  --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#10b981; --glass: rgba(255,255,255,0.03);
+  --radius:14px; --maxw:1100px;
+  --ff: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:var(--ff);background:linear-gradient(180deg,#071025 0%, #071025 60%, #071b2d 100%);color:#e6eef8;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:28px}
+
+/* NAV / HERO */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 28px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));backdrop-filter: blur(6px);position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(255,255,255,0.03)}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:20px;color:#fff}
+.brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#00dfc4,#06b6d4);display:grid;place-items:center;color:#04202a;font-weight:800}
+.nav{display:flex;gap:10px;align-items:center}
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#d8eefc;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#021018;border:none;box-shadow:0 6px 18px rgba(16,185,129,0.12)}
+.btn.ghost{background:transparent;border:none;color:var(--muted)}
+
+/* Hero */
+.hero{min-height:72vh;display:grid;align-items:center;padding:60px 28px;gap:24px}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;max-width:var(--maxw);margin:0 auto}
+h1{font-size:44px;margin:0;line-height:1.02;color:#fff}
+.lead{color:var(--muted);margin-top:10px;font-size:17px;max-width:720px}
+
+/* Feature Card on right */
+.card-hero{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,0.03)}
+.card-hero h4{margin:0 0 8px 0;color:#e6f6f0}
+.price{font-weight:800;font-size:20px;color:var(--accent)}
+
+/* Sections */
+section{padding:56px 20px}
+.sec-wrap{max-width:var(--maxw);margin:0 auto}
+.section-card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(2,6,23,0.45);margin-bottom:18px}
+.h2{font-size:28px;margin:0 0 12px 0;color:#f0fbf8}
+.p-muted{color:var(--muted);line-height:1.6}
+
+/* Cards grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:12px}
+.card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .28s ease,box-shadow .28s ease}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(2,6,23,0.6)}
+.card h3{margin:0 0 8px 0;color:#fff}
+.card p{margin:0;color:var(--muted);font-size:14px}
+
+/* Testimonials */
+.test-row{display:flex;flex-direction:row;gap:14px;flex-wrap:wrap}
+.test-item{flex:1;min-width:220px}
+
+/* CTA */
+.cta{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:26px;border-radius:12px;background:linear-gradient(90deg,rgba(16,185,129,0.06), rgba(6,182,212,0.03));border:1px solid rgba(255,255,255,0.02)}
+.cta h3{margin:0}
+.cta p{margin:0;color:var(--muted)}
+
+/* Footer */
+footer{padding:18px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.02)}
+
+/* Animations */
+.fade-up{opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
+.fade-up.show{opacity:1;transform:none}
+
+/* Mobile */
+@media (max-width:880px){
+  .hero-grid{grid-template-columns:1fr; padding-bottom:30px}
+  h1{font-size:34px}
+  .nav{display:none}
+  .topbar{padding:14px}
+  .container{padding:16px}
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>EaseRoot</h1>
-        <nav>
-            <ul id="nav-menu">
-                <li><a href="#" id="home-link">Home</a></li>
-                <li><a href="#" id="catalog-link">Catalog</a></li>
-                <li><a href="#" id="upload-link">Upload</a></li>
-                <li><a href="#" id="admin-link" class="admin-only">Admin</a></li>
-                <li><a href="#" id="test-link">Tests</a></li>
-                <li><a href="#" id="login-link">Login</a></li>
-                <li><a href="#" id="register-link">Register</a></li>
-                <li><a href="#" id="logout-link" class="logged-in-only">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- ==========================
+     HackInSeconds Landing Page (Single File)
+     All client-side. Server protections must be added on server side.
+     ========================== -->
 
-    <main>
-        <!-- Home Section -->
-        <section id="home-section" class="active">
-            <h2>Welcome to EaseRoot</h2>
-            <p>A marketplace for products, services, and courses.</p>
-            <div id="featured-items" class="catalog-grid"></div>
-        </section>
+<!-- TOPBAR -->
+<header class="topbar" role="banner">
+  <div class="brand">
+    <div class="logo">HS</div>
+    <div>
+      <div style="font-size:14px;color:#cfeeee">HackInSeconds</div>
+      <div style="font-size:11px;color:var(--muted)">Security-first digital platforms</div>
+    </div>
+  </div>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <button class="btn ghost" id="navAbout">About</button>
+    <button class="btn ghost" id="navProjects">Projects</button>
+    <button class="btn ghost" id="navTeam">Team</button>
+    <button class="btn primary" id="navCTA">Secure Your Journey</button>
+  </nav>
+</header>
 
-        <!-- Catalog Section -->
-        <section id="catalog-section">
-            <h2>Catalog</h2>
-            <div class="filters">
-                <select id="type-filter">
-                    <option value="all">All Types</option>
-                    <option value="product">Products</option>
-                    <option value="service">Services</option>
-                    <option value="course">Courses</option>
-                </select>
-                <input type="text" id="search-filter" placeholder="Search...">
-            </div>
-            <div id="catalog-items" class="catalog-grid"></div>
-        </section>
+<!-- HERO -->
+<section class="hero" role="region" aria-label="Hero">
+  <div class="hero-grid container">
+    <div>
+      <h1>HackInSeconds</h1>
+      <p class="lead p-muted">Security-first platform for modern businesses. We design, protect, and scale your digital presence — fast, reliable, and tamper-resistant.</p>
+      <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn primary" id="btnExplore">Explore Projects</button>
+        <button class="btn" id="btnWhy">Why HackInSeconds</button>
+      </div>
+      <div style="margin-top:18px;color:var(--muted);font-size:13px">No signup. No inputs. 100% static public info — server-side controls available for real protection.</div>
+    </div>
 
-        <!-- Upload Wizard Section -->
-        <section id="upload-section">
-            <h2>Create New Listing</h2>
-            <div class="wizard-progress">
-                <div class="step" data-step="1">1. Type</div>
-                <div class="step" data-step="2">2. Details</div>
-                <div class="step" data-step="3">3. Category</div>
-                <div class="step" data-step="4">4. Pricing</div>
-                <div class="step" data-step="5">5. Media</div>
-                <div class="step" data-step="6">6. Preview</div>
-            </div>
-            
-            <form id="upload-form">
-                <!-- Step 1: Type -->
-                <div class="wizard-step active" data-step="1">
-                    <h3>Choose Listing Type</h3>
-                    <div class="type-options">
-                        <label>
-                            <input type="radio" name="type" value="product" required>
-                            <div class="type-card">
-                                <h4>Product</h4>
-                                <p>Sell physical or digital products</p>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="type" value="service" required>
-                            <div class="type-card">
-                                <h4>Service</h4>
-                                <p>Offer your skills and services</p>
-                            </div>
-                        </label>
-                        <label>
-                            <input type="radio" name="type" value="course" required>
-                            <div class="type-card">
-                                <h4>Course</h4>
-                                <p>Create and sell educational content</p>
-                            </div>
-                        </label>
-                    </div>
-                    <button type="button" class="next-btn">Next</button>
-                </div>
-
-                <!-- Step 2: Title & Description -->
-                <div class="wizard-step" data-step="2">
-                    <h3>Title & Description</h3>
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" rows="5" required></textarea>
-                    </div>
-                    <button type="button" class="prev-btn">Previous</button>
-                    <button type="button" class="next-btn">Next</button>
-                </div>
-
-                <!-- Step 3: Category -->
-                <div class="wizard-step" data-step="3">
-                    <h3>Category & Sub-category</h3>
-                    <div class="form-group">
-                        <label for="category">Category</label>
-                        <select id="category" name="category" required>
-                            <option value="">Select a category</option>
-                            <option value="Technology">Technology</option>
-                            <option value="Business">Business</option>
-                            <option value="Design">Design</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Education">Education</option>
-                            <option value="Health">Health</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="subcategory">Sub-category (optional)</label>
-                        <input type="text" id="subcategory" name="subcategory">
-                    </div>
-                    <button type="button" class="prev-btn">Previous</button>
-                    <button type="button" class="next-btn">Next</button>
-                </div>
-
-                <!-- Step 4: Price & Delivery -->
-                <div class="wizard-step" data-step="4">
-                    <h3>Pricing & Delivery</h3>
-                    <div class="form-group">
-                        <label for="price">Price ($)</label>
-                        <input type="number" id="price" name="price" min="0" step="0.01" required>
-                    </div>
-                    <div class="form-group" id="delivery-group">
-                        <label for="delivery">Delivery Time (for services) or Shipping (for products)</label>
-                        <input type="text" id="delivery" name="delivery" placeholder="e.g., 3 days, Free Shipping, etc.">
-                    </div>
-                    <button type="button" class="prev-btn">Previous</button>
-                    <button type="button" class="next-btn">Next</button>
-                </div>
-
-                <!-- Step 5: Media -->
-                <div class="wizard-step" data-step="5">
-                    <h3>Upload Media</h3>
-                    <div class="form-group">
-                        <label for="media">Image/Video/File</label>
-                        <input type="file" id="media" name="media" accept="image/*,video/*,.pdf,.zip" required>
-                        <small>Accepted: Images, Videos, PDFs, ZIP files</small>
-                    </div>
-                    <div id="media-preview"></div>
-                    <button type="button" class="prev-btn">Previous</button>
-                    <button type="button" class="next-btn">Next</button>
-                </div>
-
-                <!-- Step 6: Preview & Submit -->
-                <div class="wizard-step" data-step="6">
-                    <h3>Preview Your Listing</h3>
-                    <div id="listing-preview">
-                        <h4 id="preview-title"></h4>
-                        <p id="preview-type" class="preview-meta"></p>
-                        <p id="preview-category" class="preview-meta"></p>
-                        <p id="preview-price" class="preview-meta"></p>
-                        <p id="preview-delivery" class="preview-meta"></p>
-                        <div id="preview-description"></div>
-                        <div id="preview-media"></div>
-                    </div>
-                    <button type="button" class="prev-btn">Previous</button>
-                    <button type="submit" class="submit-btn">Submit Listing</button>
-                </div>
-            </form>
-        </section>
-
-        <!-- Admin Section -->
-        <section id="admin-section">
-            <h2>Admin Panel</h2>
-            <div id="pending-listings">
-                <h3>Pending Approvals</h3>
-                <div id="pending-items" class="catalog-grid"></div>
-            </div>
-        </section>
-
-        <!-- Test Section -->
-        <section id="test-section">
-            <h2>System Tests</h2>
-            <div class="test-actions">
-                <button id="test-db-btn">Test Database</button>
-                <button id="test-auth-btn">Test Authentication</button>
-                <button id="test-upload-btn">Test Upload</button>
-                <button id="test-catalog-btn">Test Catalog</button>
-                <button id="test-admin-btn">Test Admin</button>
-            </div>
-            <div id="test-results">
-                <h3>Test Results</h3>
-                <pre id="test-output"></pre>
-            </div>
-        </section>
-
-        <!-- Auth Modals -->
-        <div id="login-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Login</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="login-email">Email</label>
-                        <input type="email" id="login-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" required>
-                    </div>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+    <aside class="card-hero">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:12px;color:var(--muted)">Featured</div>
+          <div style="font-weight:800;font-size:18px;color:#fff">Secure Marketplace</div>
         </div>
-
-        <div id="register-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Register</h2>
-                <form id="register-form">
-                    <div class="form-group">
-                        <label for="register-email">Email</label>
-                        <input type="email" id="register-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-password">Password</label>
-                        <input type="password" id="register-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="register-confirm">Confirm Password</label>
-                        <input type="password" id="register-confirm" required>
-                    </div>
-                    <button type="submit">Register</button>
-                </form>
-            </div>
+        <div style="text-align:right">
+          <div class="price">Trusted • 24/7</div>
+          <div style="font-size:11px;color:var(--muted)">Enterprise-ready</div>
         </div>
+      </div>
+      <div style="height:12px"></div>
+      <div style="color:var(--muted);font-size:13px">Hybrid of marketplace, services, and learning — rebuilt with industry-grade security practices.</div>
+    </aside>
+  </div>
+</section>
 
-        <div id="verify-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Verify Email</h2>
-                <form id="verify-form">
-                    <div class="form-group">
-                        <label for="verify-email">Email</label>
-                        <input type="email" id="verify-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="verify-token">Verification Token</label>
-                        <input type="text" id="verify-token" required>
-                    </div>
-                    <button type="submit">Verify</button>
-                </form>
-            </div>
-        </div>
-    </main>
+<!-- ABOUT -->
+<section id="about" class="sec-wrap">
+  <div class="section-card">
+    <div class="h2">About HackInSeconds</div>
+    <p class="p-muted">HackInSeconds builds platforms where privacy and security are not afterthoughts — they are the product. We combine ethical security engineering with user-centered design to deliver resilient digital products.</p>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2023 EaseRoot Marketplace</p>
-    </footer>
+<!-- MISSION -->
+<section id="mission" class="sec-wrap">
+  <div class="section-card fade-up">
+    <div class="h2">Our Mission</div>
+    <p class="p-muted">To redefine digital trust. Our systems are designed to be auditable, resilient, and resistant to casual copying or tampering. While public content must be visible to browsers, we reduce abuse surface using server-side checks and tokenized access.</p>
+  </div>
+</section>
 
-    <script src="app.js"></script>
+<!-- WHY CHOOSE -->
+<section id="why" class="sec-wrap">
+  <div class="section-card">
+    <div class="h2">Why Choose Us?</div>
+    <ul style="list-style:none;padding:0;margin:12px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>🔒 Security-first</strong><div class="p-muted">Defense-in-depth and server-side tokenization.</div></li>
+      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>⚡ Fast & scalable</strong><div class="p-muted">Optimized delivery and CDN-ready assets.</div></li>
+      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>🌍 Global reach</strong><div class="p-muted">Edge deployment and regional caching.</div></li>
+      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>🤝 Expert team</strong><div class="p-muted">Security architects and devs at your service.</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec-wrap">
+  <div class="section-card">
+    <div class="h2">Our Projects</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Digital Marketplace</h3>
+        <p>Secure listings & verified creators — marketplace rebuilt for trust.</p>
+      </div>
+      <div class="card">
+        <h3>Secure Uploads</h3>
+        <p>Step-based publishing with review & approval flows to prevent misuse.</p>
+      </div>
+      <div class="card">
+        <h3>Cloud Protection</h3>
+        <p>Encrypted storage + signed URLs for safe media delivery.</p>
+      </div>
+      <div class="card">
+        <h3>Learning Hub</h3>
+        <p>Courses and certifications with DRM-style access controls (server-side).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="sec-wrap">
+  <div class="section-card">
+    <div class="h2">What People Say</div>
+    <div class="test-row">
+      <div class="test-item card">
+        <p>"HackInSeconds made our infra secure without slowing our product."</p>
+        <div style="margin-top:10px;font-weight:700">— Cybersecurity Consultant</div>
+      </div>
+      <div class="test-item card">
+        <p>"A trusted partner for building safe developer ecosystems."</p>
+        <div style="margin-top:10px;font-weight:700">— Startup Founder</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="sec-wrap">
+  <div class="section-card">
+    <div class="h2">Our Team</div>
+    <p class="p-muted">Security engineers, ethical hackers, product designers, and digital strategists — working together to protect online experiences.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec-wrap">
+  <div class="cta">
+    <div>
+      <h3 style="margin:0">Secure Your Digital Journey</h3>
+      <p class="p-muted" style="margin-top:6px">Partner with HackInSeconds to build faster, safer, and future-ready products.</p>
+    </div>
+    <div>
+      <button class="btn primary" id="btnContact">Get Started</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    © 2025 HackInSeconds • All Rights Reserved • <span style="color:var(--muted)">This site uses client-side deterrents; critical protections require server-side configuration (see notes).</span>
+  </div>
+</footer>
+
+<!-- Overlay for blocking suspicious visitors / devtools -->
+<div id="blockOverlay" style="display:none;position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.86), rgba(0,0,0,0.92));color:#fff;z-index:9999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;">
+  <div style="max-width:760px;">
+    <h2 style="margin:0 0 10px 0;font-size:28px">Access Restricted</h2>
+    <p style="color:#cfe6e6;margin:0 0 16px">For security reasons, this content is not available in this environment. If you believe this is an error, please contact the site administrator.</p>
+    <div style="font-size:12px;color:#98f4e0">(Detected automated browser or developer tools.)</div>
+  </div>
+</div>
+
+<!-- ==========================
+     Inline JavaScript (All JS in one file)
+     Includes: anti-inspect, console warning, heuristics, simple scroll animations
+     ========================== -->
+<script>
+/* ========= Console Warning (big) ========= */
+setTimeout(() => {
+  try {
+    console.log('%c STOP ', 'background:#ff2d55;color:#fff;font-size:40px;padding:10px 20px;border-radius:8px');
+    console.log('%cThis page is protected by HackInSeconds. Unauthorized access, copying, or scraping is prohibited.','color:#98f4e0;font-size:13px');
+  } catch(e){/* ignore */ }
+}, 500);
+
+/* ========= Simple DOM helpers ========= */
+const $ = (sel)=>document.querySelector(sel);
+const $$ = (sel)=>Array.from(document.querySelectorAll(sel));
+
+/* ========= Sections fade-in on scroll ========= */
+function revealOnScroll(){
+  $$('.fade-up').forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if(r.top < (window.innerHeight - 80)) el.classList.add('show');
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+
+/* ========= Disable right-click & common shortcuts ========= */
+document.addEventListener('contextmenu', e => { e.preventDefault(); });
+
+document.addEventListener('keydown', function(e){
+  // Block F12
+  if(e.keyCode === 123){ e.preventDefault(); blockAccess('F12'); return false; }
+  // Block Ctrl+Shift+I / J
+  if(e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)){ e.preventDefault(); blockAccess('DevTools'); return false; }
+  // Block Ctrl+U (view source)
+  if(e.ctrlKey && e.keyCode === 85){ e.preventDefault(); blockAccess('ViewSource'); return false; }
+  // Block Ctrl+S, Ctrl+P (save/print)
+  if(e.ctrlKey && (e.key === 's' || e.key === 'p')){ e.preventDefault(); return false; }
+});
+
+/* ========= Heuristics: detect headless / automated browsers ========= */
+function isHeadlessOrAutomated(){
+  try {
+    // navigator.webdriver is true in automated browsers
+    if(navigator.webdriver) return true;
+    // headless userAgents / common puppeteer hints
+    const ua = (navigator.userAgent || '').toLowerCase();
+    if(/headless|phantomjs|slimerjs|webdriver|node/.test(ua)) return true;
+    // minimal screen constraints (bot may run with small window)
+    if(window.innerWidth < 300 || window.innerHeight < 200) return true;
+    // detect missing plugins (older heuristic)
+    if(navigator.plugins && navigator.plugins.length === 0 && /chrome/.test(ua)) {
+      // Chrome normally has some plugins — headless often has 0
+      return true;
+    }
+    // further timing checks (slow)
+    return false;
+  } catch(e){ return false; }
+}
+
+/* ========= DevTools open detection (timing trick) ========= */
+let devtoolsOpen = false;
+(function detectDevTools(){
+  const start = performance.now();
+  // tiny loop to measure slowdown if breakpoint is paused
+  for(let i=0;i<100000;i++){ Math.sqrt(i); }
+  const dur = performance.now() - start;
+  // if debugger slows execution massively, assume devtools/breakpoint
+  if(dur > 60) { devtoolsOpen = true; blockAccess('Debugger'); }
+  // also poll occasionally
+  setTimeout(detectDevTools, 3000);
+})();
+
+/* ========= Block overlay ========= */
+function blockAccess(reason){
+  try {
+    const ov = $('#blockOverlay');
+    if(!ov) return;
+    ov.style.display = 'flex';
+    console.warn('Access blocked by HackInSeconds. Reason:', reason);
+    // optional: send telemetry to server (can't do here in static file)
+  } catch(e){}
+}
+
+/* Immediately check heuristics */
+if(isHeadlessOrAutomated()) blockAccess('Automated Browser Detected');
+
+
+// =========================
+// Basic UI actions (scroll to sections)
+// =========================
+$('#navAbout').addEventListener('click', ()=>{ document.getElementById('about').scrollIntoView({behavior:'smooth'}); });
+$('#navProjects').addEventListener('click', ()=>{ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); });
+$('#navTeam').addEventListener('click', ()=>{ document.getElementById('team').scrollIntoView({behavior:'smooth'}); });
+$('#navCTA').addEventListener('click', ()=>{ document.querySelector('.cta').scrollIntoView({behavior:'smooth'}); });
+$('#btnExplore').addEventListener('click', ()=>{ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); });
+$('#btnWhy').addEventListener('click', ()=>{ document.getElementById('why').scrollIntoView({behavior:'smooth'}); });
+$('#btnContact').addEventListener('click', ()=>{ alert('Thank you — for production, use server-side contact form.'); });
+
+// Small accessibility: focus outlines on keyboard nav
+document.addEventListener('keydown', e => {
+  if(e.key === 'Tab') document.body.classList.add('user-is-tabbing');
+});
+
+// =========================
+// Important Note (visible in page for admins / deployers)
+// =========================
+console.info('HackInSeconds (Client Deterrents): Note that server-side protections (signed URLs, watermarking, WAF, bot detection) are required for robust anti-cloning. See recommended server steps in the comments of this file.');
+
+// =========================
+// Optional: Light obfuscation - remove human-friendly variable names (simple example)
+// (This is intentionally NOT strong obfuscation — for real obfuscation use a build step/obfuscator)
+// =========================
+</script>
+
+<!-- =========================
+     Developer Notes (Visible only in source)
+     - This single-file offers client-side deterrence (UI blocking, disable shortcuts, headless heuristics).
+     - It CANNOT prevent a determined attacker from copying static HTML/CSS/JS.
+     - To make cloning *much harder* implement these server-side:
+        1) Signed (time-limited) URLs for media (images/videos).
+        2) Serve sensitive content only via API endpoints that require session tokens.
+        3) Use watermarking for images and stream media via server (not static files).
+        4) Deploy WAF/CDN (Cloudflare, AWS WAF) with Bot Management and JS challenges.
+        5) Make your Git repository PRIVATE; deploy built artifacts only.
+        6) Log & Monitor suspicious requests (IPs, rates) and block offenders.
+     - If you want, I can generate:
+        A) nginx config + rate-limit rules + Cloudflare rule examples
+        B) PHP signed-url + watermark script for images
+        C) GitHub Actions pipeline to build/minify and deploy only minified assets
+     Save this file as `index.html` and open in browser to preview the landing page.
+   ========================= -->
+
 </body>
 </html>
