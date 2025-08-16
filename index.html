@@ -1,180 +1,540 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HackInSecond - Automation & Tech Solutions</title>
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ShoppingCart,
+  Search,
+  User,
+  Star,
+  PlayCircle,
+  BadgePercent,
+  Package,
+  Clock,
+  Layers,
+  BookOpen,
+  MessagesSquare,
+  CheckCircle,
+  Plus,
+  Minus,
+  X
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-  <!-- SEO Meta -->
-  <meta name="description" content="HackInSecond - AI Automation, Analytics, and Global Tech Projects for businesses. Save time and increase revenue with cutting-edge solutions.">
-  <meta name="keywords" content="HackInSecond, automation, AI, analytics, business automation, tech solutions">
-  <meta name="author" content="HackInSecond">
-  <meta name="robots" content="index, follow">
+// --- Demo Data --- //
+const PRODUCT_CATEGORIES = ["All", "Home", "Tech", "Wellness", "Groceries"] as const;
+const SERVICE_CATEGORIES = ["All", "Design", "Writing", "Marketing", "Tech"] as const;
+const COURSE_CATEGORIES = ["All", "Development", "Business", "Design", "Lifestyle"] as const;
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="HackInSecond - Automation & Tech Solutions">
-  <meta property="og:description" content="AI Automation, Analytics & Global Projects for Businesses.">
-  <meta property="og:image" content="channels4_profile.jpg">
-  <meta property="og:url" content="https://haciinseconds.github.io/Com/#Contact">
-  <meta name="twitter:card" content="summary_large_image">
+const products = [
+  { id: "p1", title: "Eco Bottle", price: 12.99, rating: 4.6, category: "Wellness", tag: "Bestseller" },
+  { id: "p2", title: "Wireless Earbuds", price: 39.5, rating: 4.3, category: "Tech", tag: "Hot" },
+  { id: "p3", title: "Smart LED Bulb", price: 8.99, rating: 4.1, category: "Home", tag: "Deal" },
+  { id: "p4", title: "Organic Oats", price: 3.49, rating: 4.8, category: "Groceries", tag: "New" },
+  { id: "p5", title: "Yoga Mat Pro", price: 18.0, rating: 4.7, category: "Wellness", tag: "Top Rated" },
+];
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+const services = [
+  { id: "s1", title: "Logo Design", price: 25, rating: 4.9, category: "Design", delivery: "2 days" },
+  { id: "s2", title: "SEO Blog Post (1000w)", price: 30, rating: 4.7, category: "Writing", delivery: "3 days" },
+  { id: "s3", title: "Social Media Ads", price: 45, rating: 4.6, category: "Marketing", delivery: "4 days" },
+  { id: "s4", title: "Bug Fix (Web)", price: 35, rating: 4.8, category: "Tech", delivery: "24 hrs" },
+];
 
-  <style>
-    body { transition: background 0.3s, color 0.3s; }
-    .theme-light { background: #f9fafb; color: #1f2937; }
-    .theme-dark { background: #111827; color: #f3f4f6; }
-    .card { transition: transform 0.3s, box-shadow 0.3s; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-  </style>
-</head>
-<body class="theme-light font-sans">
+const courses = [
+  { id: "c1", title: "React for Beginners", price: 19, rating: 4.8, hours: 8, category: "Development", lessons: 62 },
+  { id: "c2", title: "Branding 101", price: 15, rating: 4.5, hours: 5, category: "Design", lessons: 34 },
+  { id: "c3", title: "Freelance Mastery", price: 22, rating: 4.6, hours: 6, category: "Business", lessons: 41 },
+  { id: "c4", title: "Mindful Productivity", price: 12, rating: 4.4, hours: 3.5, category: "Lifestyle", lessons: 18 },
+];
 
-  <!-- Theme Toggle -->
-  <div class="fixed top-4 right-4 z-50 flex gap-2">
-    <button id="themeToggle" aria-label="Toggle Theme" class="px-4 py-2 bg-gray-800 text-white rounded shadow">Toggle Theme</button>
-    <!-- Mobile Menu Button -->
-    <button id="menuToggle" aria-label="Toggle Menu" class="px-4 py-2 bg-blue-600 text-white rounded shadow md:hidden">
-      <i class="fas fa-bars"></i>
-    </button>
+// --- Utilities --- //
+const format = (n: number) => new Intl.NumberFormat(undefined, { style: "currency", currency: "USD" }).format(n);
+const Stars = ({ rating }: { rating: number }) => (
+  <div className="flex items-center gap-1" aria-label={`Rating ${rating}`}>
+    <Star size={16} className="fill-yellow-400" />
+    <span className="text-xs text-gray-600">{rating.toFixed(1)}</span>
   </div>
+);
 
-  <!-- Hero Section -->
-  <header class="py-20 text-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-    <img src="channels4_profile.jpg" loading="lazy" alt="HackInSecond Company Logo" class="mx-auto w-40 h-40 object-contain mb-6 rounded-full border-4 border-white">
-    <h1 class="text-5xl font-bold mb-2">HackInSecond</h1>
-    <p class="text-xl mb-6">Automation & Tech Solutions for Businesses</p>
-    <nav aria-label="Social Links">
-      <div class="flex justify-center space-x-6 text-3xl">
-        <a href="https://x.com/@hackinseconds" aria-label="Twitter" class="hover:text-blue-300"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://www.linkedin.com/in/hackinseconds-hcl-61b215377/" aria-label="LinkedIn" class="hover:text-blue-200"><i class="fab fa-linkedin"></i></a>
-        <a href="https://youtube.com/@hackinseconds" aria-label="YouTube" class="hover:text-red-400"><i class="fab fa-youtube"></i></a>
-      </div>
-    </nav>
-  </header>
+// --- Main App --- //
+export default function EaseRootApp() {
+  const [tab, setTab] = useState("shop");
+  const [search, setSearch] = useState("");
+  const [productCat, setProductCat] = useState<typeof PRODUCT_CATEGORIES[number]>("All");
+  const [serviceCat, setServiceCat] = useState<typeof SERVICE_CATEGORIES[number]>("All");
+  const [courseCat, setCourseCat] = useState<typeof COURSE_CATEGORIES[number]>("All");
+  const [sortBy, setSortBy] = useState("popularity");
+  const [cart, setCart] = useState<{ id: string; type: "product" | "service" | "course"; title: string; price: number; qty: number }[]>([]);
+  const [enrolled, setEnrolled] = useState<string[]>([]);
+  const [showCart, setShowCart] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [user, setUser] = useState<{ name: string } | null>(null);
 
-  <!-- Navigation -->
-  <nav class="bg-gray-100 shadow sticky top-0 z-40" aria-label="Main Navigation">
-    <ul id="mainMenu" class="hidden md:flex justify-center space-x-6 sm:space-x-8 text-gray-700 font-medium py-4 md:py-4 flex-col md:flex-row md:space-y-0 space-y-4 md:space-x-8">
-      <li><a href="#Home" class="hover:text-blue-600">Home</a></li>
-      <li><a href="#About" class="hover:text-blue-600">About</a></li>
-      <li><a href="#mission" class="hover:text-blue-600">Mission</a></li>
-      <li><a href="#project" class="hover:text-blue-600">Projects</a></li>
-      <li><a href="#team" class="hover:text-blue-600">Team</a></li>
-      <li><a href="#Contact" class="hover:text-blue-600">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- About Section -->
-  <section id="About" class="max-w-5xl mx-auto py-16 px-6">
-    <h2 class="text-4xl font-bold mb-6 text-center">About Us</h2>
-    <p class="leading-relaxed text-lg text-center">
-      HackInSecond is a cutting-edge automation company helping businesses save time and increase revenue through seamless workflows.
-      We specialize in creating platforms that let you place ads, manage campaigns, and reach your audience instantly.
-    </p>
-  </section>
-
-  <!-- Mission Section -->
-  <section id="mission" class="py-20 bg-gradient-to-r from-gray-50 to-gray-100">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-6 text-gray-800">Our Mission</h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">
-        Empower society with innovative tech projects in education, healthcare, and business automation.
-      </p>
-      <div class="grid md:grid-cols-3 gap-8">
-        <article class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
-          <i class="fas fa-robot text-5xl text-blue-600 mb-6" aria-hidden="true"></i>
-          <h3 class="text-xl font-semibold text-gray-800 mb-3">AI Automation</h3>
-          <p class="text-gray-600">Smart automation systems to increase business efficiency.</p>
-        </article>
-        <article class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
-          <i class="fas fa-chart-line text-5xl text-green-600 mb-6" aria-hidden="true"></i>
-          <h3 class="text-xl font-semibold text-gray-800">Analytics Tools</h3>
-          <p class="text-gray-600">Data-driven insights to grow your business quickly.</p>
-        </article>
-        <article class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition">
-          <i class="fas fa-globe text-5xl text-purple-600 mb-6" aria-hidden="true"></i>
-          <h3 class="text-xl font-semibold text-gray-800 mb-3">Global Projects</h3>
-          <p class="text-gray-600">Connecting communities worldwide with technology.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="project" class="max-w-6xl mx-auto py-20 px-6">
-    <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">Our Projects</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col">
-        <img src="https://hawksem.com/wp-content/uploads/2021/01/Google-Ads-homepage-1-1024x499.png" loading="lazy" alt="Smart Ad Manager Project Screenshot" class="w-full object-cover">
-        <div class="p-6 flex flex-col flex-grow">
-          <h3 class="text-xl font-semibold text-gray-800">Smart Ad Manager</h3>
-          <p class="text-gray-600 mb-4 flex-grow">Automates ad placement and optimization using AI analytics.</p>
-          <a href="#" class="text-blue-600 font-medium hover:underline mt-auto">View Details →</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Team Section -->
-  <section id="team" class="max-w-6xl mx-auto py-20 px-6">
-    <h2 class="text-4xl font-bold mb-12 text-center text-gray-800">Our Team</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-      <div>
-        <img src="team1.jpg" loading="lazy" alt="John Doe - CEO & Founder" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-        <h3 class="text-lg font-semibold">John Doe</h3>
-        <p class="text-gray-500">CEO & Founder</p>
-      </div>
-      <div>
-        <img src="team2.jpg" loading="lazy" alt="Jane Smith - Lead Developer" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-        <h3 class="text-lg font-semibold">Jane Smith</h3>
-        <p class="text-gray-500">Lead Developer</p>
-      </div>
-      <div>
-        <img src="team3.jpg" loading="lazy" alt="Mike Johnson - Project Manager" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
-        <h3 class="text-lg font-semibold">Mike Johnson</h3>
-        <p class="text-gray-500">Project Manager</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="Contact" class="max-w-5xl mx-auto py-16 px-6">
-    <h2 class="text-4xl font-bold mb-6 text-center">Contact Us</h2>
-    <div class="text-center">
-      <p class="text-lg text-gray-700">Have questions? Reach out to us at:</p>
-      <a href="mailto:your-email@example.com" class="text-blue-600 font-semibold text-lg hover:underline">
-        your-email@example.com
-      </a>
-    </div>
-  </section>
-
-  <footer class="py-6 text-center text-gray-500 border-t">
-    &copy; 2025 HackInSecond. All rights reserved.
-  </footer>
-
-  <script>
-    // Theme Toggle
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      document.body.classList.toggle('theme-dark');
-      document.body.classList.toggle('theme-light');
-    });
-
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const mainMenu = document.getElementById('mainMenu');
-    menuToggle.addEventListener('click', () => {
-      mainMenu.classList.toggle('hidden');
-    });
-
-    // Disable Right Click & Inspect
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = function(e) {
-      if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
-        return false;
+  const addToCart = (item: { id: string; type: "product" | "service" | "course"; title: string; price: number }) => {
+    setCart((prev) => {
+      const i = prev.findIndex((p) => p.id === item.id && p.type === item.type);
+      if (i !== -1) {
+        const copy = [...prev];
+        copy[i].qty += 1;
+        return copy;
       }
-    }
-  </script>
-</body>
-</html>
+      return [...prev, { ...item, qty: 1 }];
+    });
+  };
+
+  const increment = (idx: number) => setCart((prev) => prev.map((p, i) => (i === idx ? { ...p, qty: p.qty + 1 } : p)));
+  const decrement = (idx: number) => setCart((prev) => prev.flatMap((p, i) => (i === idx ? (p.qty > 1 ? { ...p, qty: p.qty - 1 } : []) : p)) as any);
+  const removeIdx = (idx: number) => setCart((prev) => prev.filter((_, i) => i !== idx));
+
+  const cartTotal = useMemo(() => cart.reduce((s, i) => s + i.price * i.qty, 0), [cart]);
+
+  const filteredProducts = useMemo(() => {
+    let list = products.filter((p) =>
+      [p.title, p.category].some((v) => v.toLowerCase().includes(search.toLowerCase()))
+    );
+    if (productCat !== "All") list = list.filter((p) => p.category === productCat);
+    return sort(list, sortBy);
+  }, [search, productCat, sortBy]);
+
+  const filteredServices = useMemo(() => {
+    let list = services.filter((s) => [s.title, s.category].some((v) => v.toLowerCase().includes(search.toLowerCase())));
+    if (serviceCat !== "All") list = list.filter((s) => s.category === serviceCat);
+    return sort(list, sortBy);
+  }, [search, serviceCat, sortBy]);
+
+  const filteredCourses = useMemo(() => {
+    let list = courses.filter((c) => [c.title, c.category].some((v) => v.toLowerCase().includes(search.toLowerCase())));
+    if (courseCat !== "All") list = list.filter((c) => c.category === courseCat);
+    return sort(list, sortBy);
+  }, [search, courseCat, sortBy]);
+
+  function sort<T extends { rating?: number; price?: number }>(list: T[], how: string) {
+    const l = [...list];
+    if (how === "price-asc") l.sort((a: any, b: any) => (a.price ?? 0) - (b.price ?? 0));
+    if (how === "price-desc") l.sort((a: any, b: any) => (b.price ?? 0) - (a.price ?? 0));
+    if (how === "rating") l.sort((a: any, b: any) => (b.rating ?? 0) - (a.rating ?? 0));
+    return l;
+  }
+
+  const signInDemo = () => {
+    setUser({ name: "EaseRoot User" });
+    setAuthOpen(false);
+  };
+
+  const checkout = () => {
+    alert(`Checkout successful! (Demo)\nTotal: ${format(cartTotal)}`);
+    setCart([]);
+    setShowCart(false);
+  };
+
+  const enrollCourse = (cId: string, courseTitle: string, price: number) => {
+    if (!enrolled.includes(cId)) setEnrolled((e) => [...e, cId]);
+    addToCart({ id: `enroll-${cId}`, type: "course", title: `Enroll: ${courseTitle}`, price });
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3">
+          <motion.div initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex items-center gap-2">
+            <Layers className="text-emerald-600" />
+            <span className="font-extrabold text-xl text-emerald-700">EaseRoot</span>
+            <Badge variant="secondary" className="hidden sm:inline-flex gap-1"><BadgePercent size={14}/>One hub: Shop · Services · Courses</Badge>
+          </motion.div>
+
+          <div className="flex-1" />
+
+          <div className="hidden md:flex items-center gap-2 w-[420px]">
+            <div className="relative w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={16} />
+              <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products, services, courses" className="pl-9" />
+            </div>
+            <Select value={sortBy} onValueChange={setSortBy}>
+              <SelectTrigger className="w-[150px]"><SelectValue placeholder="Sort by"/></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="popularity">Popularity</SelectItem>
+                <SelectItem value="rating">Rating</SelectItem>
+                <SelectItem value="price-asc">Price: Low</SelectItem>
+                <SelectItem value="price-desc">Price: High</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Button variant="ghost" className="md:hidden" onClick={() => setShowCart(true)} aria-label="Open Cart">
+            <ShoppingCart />
+          </Button>
+
+          <div className="hidden md:flex items-center gap-2">
+            <Button variant="secondary" onClick={() => setShowCart(true)} className="flex items-center gap-2">
+              <ShoppingCart size={16}/> Cart ({cart.reduce((s, i) => s + i.qty, 0)})
+            </Button>
+            <Dialog open={authOpen} onOpenChange={setAuthOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="flex items-center gap-2"><User size={16}/>{user ? user.name : "Sign In"}</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Welcome to EaseRoot</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-3">
+                  <Input placeholder="Email" />
+                  <Input placeholder="Password" type="password" />
+                  <Button className="w-full" onClick={signInDemo}>Continue (Demo)</Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Search */}
+      <div className="md:hidden px-4 py-3 flex gap-2 items-center border-b bg-white">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={16} />
+          <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products, services, courses" className="pl-9" />
+        </div>
+        <Select value={sortBy} onValueChange={setSortBy}>
+          <SelectTrigger className="w-[135px]"><SelectValue placeholder="Sort by"/></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="popularity">Popularity</SelectItem>
+            <SelectItem value="rating">Rating</SelectItem>
+            <SelectItem value="price-asc">Price: Low</SelectItem>
+            <SelectItem value="price-desc">Price: High</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-emerald-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-emerald-700 leading-tight">One Platform. Infinite Possibilities.</h1>
+            <p className="mt-3 text-gray-600">Shop everyday essentials, hire trusted freelancers, and learn new skills — all in one place.</p>
+            <div className="mt-5 flex gap-3">
+              <Button onClick={() => setTab("shop")} className="rounded-2xl">Explore Shop</Button>
+              <Button variant="outline" onClick={() => setTab("services")} className="rounded-2xl">Find Services</Button>
+              <Button variant="secondary" onClick={() => setTab("courses")} className="rounded-2xl">Browse Courses</Button>
+            </div>
+            <div className="mt-4 flex gap-3 text-sm text-gray-600">
+              <div className="flex items-center gap-1"><CheckCircle size={16}/> Secure checkout</div>
+              <div className="flex items-center gap-1"><Clock size={16}/> 24/7 access</div>
+              <div className="flex items-center gap-1"><Package size={16}/> Fast delivery</div>
+            </div>
+          </div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="md:justify-self-end">
+            <Card className="rounded-2xl shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2"><BadgePercent className="text-emerald-600"/> Featured Deal</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold">Wireless Earbuds</div>
+                    <Stars rating={4.3} />
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-extrabold text-emerald-700">{format(29.5)}</div>
+                    <div className="text-xs line-through text-gray-400">{format(39.5)}</div>
+                  </div>
+                </div>
+                <Button className="w-full mt-4" onClick={() => addToCart({ id: "p2", type: "product", title: "Wireless Earbuds", price: 29.5 })}>Add to Cart</Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Tabs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Tabs value={tab} onValueChange={setTab}>
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 rounded-2xl w-full">
+            <TabsTrigger value="shop" className="rounded-2xl">Shop</TabsTrigger>
+            <TabsTrigger value="services" className="rounded-2xl">Services</TabsTrigger>
+            <TabsTrigger value="courses" className="rounded-2xl">Courses</TabsTrigger>
+            <TabsTrigger value="dashboard" className="rounded-2xl">Dashboard</TabsTrigger>
+          </TabsList>
+
+          {/* Shop */}
+          <TabsContent value="shop" className="mt-6">
+            <div className="flex items-center justify-between mb-4 gap-3">
+              <div className="flex items-center gap-2">
+                <Badge>Amazon-style</Badge>
+                <span className="text-sm text-gray-600">Browse products & add to cart</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm">Category</span>
+                <Select value={productCat} onValueChange={(v) => setProductCat(v as any)}>
+                  <SelectTrigger className="w-[150px]"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {PRODUCT_CATEGORIES.map((c) => (
+                      <SelectItem key={c} value={c}>{c}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {filteredProducts.map((p) => (
+                <Card key={p.id} className="rounded-2xl hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between">
+                      <span>{p.title}</span>
+                      <Badge variant="secondary">{p.tag}</Badge>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="h-28 bg-gradient-to-br from-emerald-50 to-white rounded-xl flex items-center justify-center">
+                      <Package />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Stars rating={p.rating} />
+                      <div className="font-bold">{format(p.price)}</div>
+                    </div>
+                    <Button className="w-full" onClick={() => addToCart({ id: p.id, type: "product", title: p.title, price: p.price })}>
+                      Add to Cart
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {/* Services */}
+          <TabsContent value="services" className="mt-6">
+            <div className="flex items-center justify-between mb-4 gap-3">
+              <div className="flex items-center gap-2">
+                <Badge>Fiverr-style</Badge>
+                <span className="text-sm text-gray-600">Hire freelancers & book gigs</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm">Category</span>
+                <Select value={serviceCat} onValueChange={(v) => setServiceCat(v as any)}>
+                  <SelectTrigger className="w-[150px]"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {SERVICE_CATEGORIES.map((c) => (
+                      <SelectItem key={c} value={c}>{c}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {filteredServices.map((s) => (
+                <Card key={s.id} className="rounded-2xl hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between">
+                      <span>{s.title}</span>
+                      <Badge variant="secondary">{s.delivery}</Badge>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="h-28 bg-gradient-to-br from-violet-50 to-white rounded-xl flex items-center justify-center">
+                      <MessagesSquare />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Stars rating={s.rating} />
+                      <div className="font-bold">{format(s.price)}</div>
+                    </div>
+                    <Button className="w-full" onClick={() => addToCart({ id: s.id, type: "service", title: s.title, price: s.price })}>
+                      Book Service
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {/* Courses */}
+          <TabsContent value="courses" className="mt-6">
+            <div className="flex items-center justify-between mb-4 gap-3">
+              <div className="flex items-center gap-2">
+                <Badge>Udemy-style</Badge>
+                <span className="text-sm text-gray-600">Enroll & start learning</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm">Category</span>
+                <Select value={courseCat} onValueChange={(v) => setCourseCat(v as any)}>
+                  <SelectTrigger className="w-[160px]"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {COURSE_CATEGORIES.map((c) => (
+                      <SelectItem key={c} value={c}>{c}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {filteredCourses.map((c) => (
+                <Card key={c.id} className="rounded-2xl hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between">
+                      <span>{c.title}</span>
+                      <Badge variant="secondary">{c.hours}h • {c.lessons} lessons</Badge>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="h-28 bg-gradient-to-br from-amber-50 to-white rounded-xl flex items-center justify-center">
+                      <PlayCircle />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Stars rating={c.rating} />
+                      <div className="font-bold">{format(c.price)}</div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button className="flex-1" onClick={() => enrollCourse(c.id, c.title, c.price)}>Enroll</Button>
+                      <Button variant="outline" className="flex-1" onClick={() => addToCart({ id: c.id, type: "course", title: c.title, price: c.price })}>Add to Cart</Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {/* Dashboard */}
+          <TabsContent value="dashboard" className="mt-6">
+            <div className="grid lg:grid-cols-3 gap-5">
+              <Card className="rounded-2xl">
+                <CardHeader>
+                  <CardTitle>Account</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {user ? (
+                    <>
+                      <div className="text-sm text-gray-600">Signed in as</div>
+                      <div className="font-semibold">{user.name}</div>
+                      <Button variant="outline" onClick={() => setUser(null)}>Sign out</Button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-sm text-gray-600">You are not signed in.</div>
+                      <Button onClick={() => setAuthOpen(true)}>Sign In</Button>
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card className="rounded-2xl lg:col-span-2">
+                <CardHeader>
+                  <CardTitle>My Courses</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {enrolled.length === 0 ? (
+                    <div className="text-gray-600">No courses enrolled yet.</div>
+                  ) : (
+                    <ul className="space-y-2">
+                      {courses.filter((c) => enrolled.includes(c.id)).map((c) => (
+                        <li key={c.id} className="flex items-center justify-between bg-white rounded-xl p-3 border">
+                          <div className="flex items-center gap-2"><PlayCircle size={18}/><span>{c.title}</span></div>
+                          <Button variant="secondary" className="rounded-xl">Continue</Button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card className="rounded-2xl lg:col-span-3">
+                <CardHeader>
+                  <CardTitle>Recent Activity</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {cart.slice(0,6).map((i, idx) => (
+                      <li key={idx} className="bg-white rounded-xl p-3 border flex items-center justify-between">
+                        <div className="flex items-center gap-2"><CheckCircle size={16}/><span>{i.title}</span></div>
+                        <div className="text-sm text-gray-600">{format(i.price)} × {i.qty}</div>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+
+      {/* Cart Drawer (Dialog) */}
+      <Dialog open={showCart} onOpenChange={setShowCart}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2"><ShoppingCart/> Your Cart</DialogTitle>
+          </DialogHeader>
+          {cart.length === 0 ? (
+            <div className="text-gray-600">Your cart is empty.</div>
+          ) : (
+            <div className="space-y-4">
+              {cart.map((item, idx) => (
+                <div key={`${item.id}-${idx}`} className="flex items-center justify-between bg-white p-3 rounded-xl border">
+                  <div className="min-w-0">
+                    <div className="font-medium truncate">{item.title}</div>
+                    <div className="text-xs text-gray-500">{item.type.toUpperCase()}</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="icon" className="rounded-xl" onClick={() => decrement(idx)}><Minus size={14}/></Button>
+                      <div className="w-6 text-center">{item.qty}</div>
+                      <Button variant="outline" size="icon" className="rounded-xl" onClick={() => increment(idx)}><Plus size={14}/></Button>
+                    </div>
+                    <div className="w-24 text-right font-semibold">{format(item.price * item.qty)}</div>
+                    <Button variant="ghost" size="icon" onClick={() => removeIdx(idx)} aria-label="Remove"><X/></Button>
+                  </div>
+                </div>
+              ))}
+              <div className="flex items-center justify-between pt-3 border-t">
+                <div className="text-sm text-gray-600">Total</div>
+                <div className="text-xl font-extrabold text-emerald-700">{format(cartTotal)}</div>
+              </div>
+              <div className="flex gap-2">
+                <Button className="flex-1" onClick={checkout}>Checkout (Demo)</Button>
+                <Button variant="outline" className="flex-1" onClick={() => setShowCart(false)}>Continue Shopping</Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Footer */}
+      <footer className="border-t bg-white/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 font-bold text-emerald-700"><Layers/>EaseRoot</div>
+            <p className="text-sm text-gray-600 mt-2">Built as a demo inspired by Amazon, Fiverr and Udemy — a single hub for shopping, hiring and learning.</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm">
+            <div>
+              <div className="font-semibold mb-2">Shop</div>
+              <ul className="space-y-1 text-gray-600">
+                <li>Best Sellers</li>
+                <li>New Arrivals</li>
+                <li>Deals</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold mb-2">Services</div>
+              <ul className="space-y-1 text-gray-600">
+                <li>Design</li>
+                <li>Marketing</li>
+                <li>Tech Support</li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold mb-2">Courses</div>
+              <ul className="space-y-1 text-gray-600">
+                <li>Development</li>
+                <li>Business</li>
+                <li>Design</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="text-center text-xs text-gray-500 pb-6">© 2025 EaseRoot. All rights reserved.</div>
+      </footer>
+    </div>
+  );
+}
