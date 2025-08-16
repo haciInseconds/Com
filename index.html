@@ -1,379 +1,288 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>HackInSeconds — Secure Digital Future</title>
-<meta name="description" content="HackInSeconds — security-first digital platform. Trusted, fast & future-ready."/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>HackInSeconds — One-Time Automation Offers (OTO)</title>
+<meta name="description" content="HackInSeconds builds automated business systems and one-time offers (OTOs). Upload once — automate revenue. Our mission: Khidmat-e-Khalq."/>
+<meta name="robots" content="index,follow"/>
+<!-- Open Graph -->
+<meta property="og:title" content="HackInSeconds — One-Time Automation Offers"/>
+<meta property="og:description" content="Automate revenue with OTO funnels, secure media delivery, and instant fulfillment."/>
+<meta property="og:image" content="favicon.jpg"/>
+<link rel="icon" href="favicon.jpg" />
 <style>
-/* =========================
-   HackInSeconds - Single File Landing Page (All CSS inline)
-   Responsive, modern, subtle animation
-   ========================= */
+/* ====== Compact modern styles (dark/light) ====== */
 :root{
-  --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#10b981; --glass: rgba(255,255,255,0.03);
-  --radius:14px; --maxw:1100px;
-  --ff: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --bg-dark:#071425; --bg-light:#f7fbff;
+  --card-dark:#081728; --card-light:#ffffff;
+  --text-dark:#e6f2ff; --text-light:#0b1220;
+  --accent:#10b981; --muted: #9fb3c9;
+  --maxw:1100px; --radius:12px; --ff: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:var(--ff);background:linear-gradient(180deg,#071025 0%, #071025 60%, #071b2d 100%);color:#e6eef8;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration:none}
-.container{max-width:var(--maxw);margin:0 auto;padding:28px}
+html,body{height:100%;margin:0;font-family:var(--ff);-webkit-font-smoothing:antialiased}
+body{background:var(--bg-dark);color:var(--text-dark);transition:background .25s ease,color .25s ease}
+.light { background: var(--bg-light); color: var(--text-light); }
+.container{max-width:var(--maxw);margin:0 auto;padding:22px}
 
-/* NAV / HERO */
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 28px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));backdrop-filter: blur(6px);position:sticky;top:0;z-index:60;border-bottom:1px solid rgba(255,255,255,0.03)}
-.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:20px;color:#fff}
-.brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#00dfc4,#06b6d4);display:grid;place-items:center;color:#04202a;font-weight:800}
-.nav{display:flex;gap:10px;align-items:center}
-.btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#d8eefc;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
-.btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#021018;border:none;box-shadow:0 6px 18px rgba(16,185,129,0.12)}
-.btn.ghost{background:transparent;border:none;color:var(--muted)}
+/* Header */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;position:sticky;top:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));backdrop-filter:blur(6px);z-index:40;border-bottom:1px solid rgba(255,255,255,0.03)}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:48px;height:48px;border-radius:10px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,#00dfc4,#06b6d4)}
+.brand h1{font-size:16px;margin:0}
+.controls{display:flex;gap:8px;align-items:center}
+
+/* Buttons */
+.btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#06b6d4);color:#021018}
 
 /* Hero */
-.hero{min-height:72vh;display:grid;align-items:center;padding:60px 28px;gap:24px}
-.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;max-width:var(--maxw);margin:0 auto}
-h1{font-size:44px;margin:0;line-height:1.02;color:#fff}
-.lead{color:var(--muted);margin-top:10px;font-size:17px;max-width:720px}
+.hero{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;padding:44px 0}
+.hero h2{font-size:34px;margin:0}
+.lead{color:var(--muted);margin-top:10px;max-width:720px}
 
-/* Feature Card on right */
-.card-hero{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,0.03)}
-.card-hero h4{margin:0 0 8px 0;color:#e6f6f0}
-.price{font-weight:800;font-size:20px;color:var(--accent)}
+/* Card */
+.card{background:var(--card-dark);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
+.light .card{background:var(--card-light);border:1px solid rgba(13,18,20,0.05);color:var(--text-light)}
 
 /* Sections */
-section{padding:56px 20px}
-.sec-wrap{max-width:var(--maxw);margin:0 auto}
-.section-card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(2,6,23,0.45);margin-bottom:18px}
-.h2{font-size:28px;margin:0 0 12px 0;color:#f0fbf8}
-.p-muted{color:var(--muted);line-height:1.6}
-
-/* Cards grid */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:12px}
-.card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .28s ease,box-shadow .28s ease}
-.card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(2,6,23,0.6)}
-.card h3{margin:0 0 8px 0;color:#fff}
-.card p{margin:0;color:var(--muted);font-size:14px}
-
-/* Testimonials */
-.test-row{display:flex;flex-direction:row;gap:14px;flex-wrap:wrap}
-.test-item{flex:1;min-width:220px}
-
-/* CTA */
-.cta{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:26px;border-radius:12px;background:linear-gradient(90deg,rgba(16,185,129,0.06), rgba(6,182,212,0.03));border:1px solid rgba(255,255,255,0.02)}
-.cta h3{margin:0}
-.cta p{margin:0;color:var(--muted)}
+section{padding:34px 0}
+.section-inner{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:12px}
 
 /* Footer */
-footer{padding:18px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.02)}
+footer{padding:18px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.03)}
 
-/* Animations */
-.fade-up{opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
-.fade-up.show{opacity:1;transform:none}
-
-/* Mobile */
-@media (max-width:880px){
-  .hero-grid{grid-template-columns:1fr; padding-bottom:30px}
-  h1{font-size:34px}
-  .nav{display:none}
-  .topbar{padding:14px}
-  .container{padding:16px}
+/* responsive */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:14px}
+  .hero h2{font-size:28px}
 }
 </style>
 </head>
 <body>
-<!-- ==========================
-     HackInSeconds Landing Page (Single File)
-     All client-side. Server protections must be added on server side.
-     ========================== -->
-
-<!-- TOPBAR -->
+<!-- Topbar -->
 <header class="topbar" role="banner">
   <div class="brand">
-    <div class="logo">HS</div>
-    <div>
-      <div style="font-size:14px;color:#cfeeee">HackInSeconds</div>
-      <div style="font-size:11px;color:var(--muted)">Security-first digital platforms</div>
+    <div class="logo" aria-hidden="true">
+      <!-- If you have a logo, place favicon.jpg next to this file -->
+      <img src="favicon.jpg" alt="HackInSeconds logo" style="width:100%;height:100%;object-fit:cover">
     </div>
-  </div>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <button class="btn ghost" id="navAbout">About</button>
-    <button class="btn ghost" id="navProjects">Projects</button>
-    <button class="btn ghost" id="navTeam">Team</button>
-    <button class="btn primary" id="navCTA">Secure Your Journey</button>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section class="hero" role="region" aria-label="Hero">
-  <div class="hero-grid container">
     <div>
       <h1>HackInSeconds</h1>
-      <p class="lead p-muted">Security-first platform for modern businesses. We design, protect, and scale your digital presence — fast, reliable, and tamper-resistant.</p>
-      <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn primary" id="btnExplore">Explore Projects</button>
-        <button class="btn" id="btnWhy">Why HackInSeconds</button>
+      <div style="font-size:12px;color:var(--muted)">One-Time Automation Business Systems</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn ghost" id="themeToggle" aria-label="Toggle color theme">Dark/Light</button>
+    <button class="btn primary" id="ctaBtn">Discover OTOs</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<main class="container">
+  <section class="hero" role="region" aria-label="Hero">
+    <div>
+      <h2>Upload once — automate revenue. One-Time Offers that convert.</h2>
+      <p class="lead">HackInSeconds builds end-to-end automated systems and one-time offers (OTOs) — think upload a product like KDP once, set your funnel, and earn automatically. Our mission: <strong>“Khadimat-e-Khalq — insano ki khidmat karna”</strong>.</p>
+      <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn primary" id="heroExplore">See Solutions</button>
+        <button class="btn ghost" id="heroHow">How it works</button>
       </div>
-      <div style="margin-top:18px;color:var(--muted);font-size:13px">No signup. No inputs. 100% static public info — server-side controls available for real protection.</div>
     </div>
 
-    <aside class="card-hero">
+    <aside class="card" aria-hidden="true">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div style="font-size:12px;color:var(--muted)">Featured</div>
-          <div style="font-weight:800;font-size:18px;color:#fff">Secure Marketplace</div>
-        </div>
-        <div style="text-align:right">
-          <div class="price">Trusted • 24/7</div>
-          <div style="font-size:11px;color:var(--muted)">Enterprise-ready</div>
-        </div>
+        <div><strong>Featured</strong><div style="font-size:12px;color:var(--muted)">Automated OTO Funnels</div></div>
+        <div style="text-align:right"><div style="color:var(--accent);font-weight:800">Conversion Focus</div><div style="font-size:12px;color:var(--muted)">Secure delivery</div></div>
       </div>
-      <div style="height:12px"></div>
-      <div style="color:var(--muted);font-size:13px">Hybrid of marketplace, services, and learning — rebuilt with industry-grade security practices.</div>
+      <div style="margin-top:12px;color:var(--muted);font-size:14px">Payment gating, instant upsells, automated fulfillment and secure media delivery — designed for creators & sellers.</div>
     </aside>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section id="about" class="sec-wrap">
-  <div class="section-card">
-    <div class="h2">About HackInSeconds</div>
-    <p class="p-muted">HackInSeconds builds platforms where privacy and security are not afterthoughts — they are the product. We combine ethical security engineering with user-centered design to deliver resilient digital products.</p>
-  </div>
-</section>
-
-<!-- MISSION -->
-<section id="mission" class="sec-wrap">
-  <div class="section-card fade-up">
-    <div class="h2">Our Mission</div>
-    <p class="p-muted">To redefine digital trust. Our systems are designed to be auditable, resilient, and resistant to casual copying or tampering. While public content must be visible to browsers, we reduce abuse surface using server-side checks and tokenized access.</p>
-  </div>
-</section>
-
-<!-- WHY CHOOSE -->
-<section id="why" class="sec-wrap">
-  <div class="section-card">
-    <div class="h2">Why Choose Us?</div>
-    <ul style="list-style:none;padding:0;margin:12px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
-      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>🔒 Security-first</strong><div class="p-muted">Defense-in-depth and server-side tokenization.</div></li>
-      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>⚡ Fast & scalable</strong><div class="p-muted">Optimized delivery and CDN-ready assets.</div></li>
-      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>🌍 Global reach</strong><div class="p-muted">Edge deployment and regional caching.</div></li>
-      <li style="background:var(--glass);padding:12px;border-radius:10px"><strong>🤝 Expert team</strong><div class="p-muted">Security architects and devs at your service.</div></li>
-    </ul>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="sec-wrap">
-  <div class="section-card">
-    <div class="h2">Our Projects</div>
-    <div class="grid">
+  <!-- About -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="section-inner">
       <div class="card">
-        <h3>Digital Marketplace</h3>
-        <p>Secure listings & verified creators — marketplace rebuilt for trust.</p>
-      </div>
-      <div class="card">
-        <h3>Secure Uploads</h3>
-        <p>Step-based publishing with review & approval flows to prevent misuse.</p>
-      </div>
-      <div class="card">
-        <h3>Cloud Protection</h3>
-        <p>Encrypted storage + signed URLs for safe media delivery.</p>
-      </div>
-      <div class="card">
-        <h3>Learning Hub</h3>
-        <p>Courses and certifications with DRM-style access controls (server-side).</p>
+        <h3 id="about-title">About HackInSeconds</h3>
+        <p class="p-muted">We craft automation pipelines for digital creators and businesses. Upload assets once (books, courses, downloadable products), configure OTO funnels, and let automated flows convert visitors into buyers while handling delivery and tracking.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials" class="sec-wrap">
-  <div class="section-card">
-    <div class="h2">What People Say</div>
-    <div class="test-row">
-      <div class="test-item card">
-        <p>"HackInSeconds made our infra secure without slowing our product."</p>
-        <div style="margin-top:10px;font-weight:700">— Cybersecurity Consultant</div>
-      </div>
-      <div class="test-item card">
-        <p>"A trusted partner for building safe developer ecosystems."</p>
-        <div style="margin-top:10px;font-weight:700">— Startup Founder</div>
+  <!-- How it works -->
+  <section id="how" aria-labelledby="how-title">
+    <div class="section-inner">
+      <div class="card">
+        <h3 id="how-title">How it works (example)</h3>
+        <ol>
+          <li><strong>Upload</strong> your asset (ebook, course, template) — store securely.</li>
+          <li><strong>Configure</strong> your funnel & one-time offer pricing and rules.</li>
+          <li><strong>Automate</strong> fulfillment so buyers get instant access — revenue flows to your account.</li>
+        </ol>
+        <p style="color:var(--muted);margin-top:8px">All media delivery uses server-side signed URLs and watermarking (server required) to prevent unauthorized reuse.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TEAM -->
-<section id="team" class="sec-wrap">
-  <div class="section-card">
-    <div class="h2">Our Team</div>
-    <p class="p-muted">Security engineers, ethical hackers, product designers, and digital strategists — working together to protect online experiences.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="sec-wrap">
-  <div class="cta">
-    <div>
-      <h3 style="margin:0">Secure Your Digital Journey</h3>
-      <p class="p-muted" style="margin-top:6px">Partner with HackInSeconds to build faster, safer, and future-ready products.</p>
+  <!-- Team -->
+  <section id="team" aria-labelledby="team-title">
+    <div class="section-inner">
+      <div class="card">
+        <h3 id="team-title">Meet the Team</h3>
+        <p class="p-muted">Digital marketers, automation engineers, and security specialists — we design funnels that sell and systems that protect your IP.</p>
+      </div>
     </div>
-    <div>
-      <button class="btn primary" id="btnContact">Get Started</button>
+  </section>
+
+  <!-- CTA -->
+  <section aria-label="Call to action">
+    <div class="section-inner">
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap">
+        <div>
+          <strong style="font-size:18px">Ready to automate your revenue with a One-Time Offer?</strong>
+          <div style="color:var(--muted);margin-top:6px">We build, secure, and deploy OTO funnels. For production we recommend server-side signed media & WAF protection.</div>
+        </div>
+        <div>
+          <button class="btn primary" id="startBtn">Start a Project</button>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    © 2025 HackInSeconds • All Rights Reserved • <span style="color:var(--muted)">This site uses client-side deterrents; critical protections require server-side configuration (see notes).</span>
-  </div>
-</footer>
+  <footer>
+    <div style="max-width:var(--maxw);margin:0 auto;padding:18px 20px;color:var(--muted);font-size:13px">
+      © 2025 HackInSeconds • Khidmat-e-Khalq — serving people with automation • No public upload forms here • Use server protections for production.
+    </div>
+  </footer>
+</main>
 
-<!-- Overlay for blocking suspicious visitors / devtools -->
-<div id="blockOverlay" style="display:none;position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.86), rgba(0,0,0,0.92));color:#fff;z-index:9999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;">
-  <div style="max-width:760px;">
-    <h2 style="margin:0 0 10px 0;font-size:28px">Access Restricted</h2>
-    <p style="color:#cfe6e6;margin:0 0 16px">For security reasons, this content is not available in this environment. If you believe this is an error, please contact the site administrator.</p>
-    <div style="font-size:12px;color:#98f4e0">(Detected automated browser or developer tools.)</div>
+<!-- Blocking overlay (hidden by default) -->
+<div id="blockOverlay" style="display:none;position:fixed;inset:0;background:rgba(2,6,12,0.92);color:#fff;z-index:9999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px">
+  <div style="max-width:760px">
+    <h2 style="margin:0 0 8px">Access Restricted</h2>
+    <p style="color:#bfe6d8">This environment appears to be automated or has developer tools open. For security reasons this site blocks access in such environments.</p>
   </div>
 </div>
 
-<!-- ==========================
-     Inline JavaScript (All JS in one file)
-     Includes: anti-inspect, console warning, heuristics, simple scroll animations
-     ========================== -->
 <script>
-/* ========= Console Warning (big) ========= */
-setTimeout(() => {
-  try {
-    console.log('%c STOP ', 'background:#ff2d55;color:#fff;font-size:40px;padding:10px 20px;border-radius:8px');
-    console.log('%cThis page is protected by HackInSeconds. Unauthorized access, copying, or scraping is prohibited.','color:#98f4e0;font-size:13px');
-  } catch(e){/* ignore */ }
-}, 500);
+/* ========= HIGH-LEVEL CLIENT-SIDE PROTECTIONS =========
+   These deter casual copying and automated scrapers.
+   THEY ARE NOT A SUBSTITUTE FOR server-side protections:
+   - signed, time-limited media URLs
+   - watermarking & streaming media via server
+   - CDN + WAF (Cloudflare/AWS)
+   - rate limiting & bot management
+*/
 
-/* ========= Simple DOM helpers ========= */
-const $ = (sel)=>document.querySelector(sel);
-const $$ = (sel)=>Array.from(document.querySelectorAll(sel));
+/* Basic utilities */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
-/* ========= Sections fade-in on scroll ========= */
-function revealOnScroll(){
-  $$('.fade-up').forEach(el=>{
-    const r = el.getBoundingClientRect();
-    if(r.top < (window.innerHeight - 80)) el.classList.add('show');
-  });
+/* THEME toggle (dark/light) */
+const body = document.body;
+const themeToggle = document.getElementById('themeToggle');
+function setLight(on){
+  if(on) body.classList.add('light'); else body.classList.remove('light');
+  try { localStorage.setItem('hs_light', on ? '1':'0'); } catch(e){}
 }
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+themeToggle.addEventListener('click', ()=>{
+  setLight(!body.classList.contains('light'));
+});
+try{ if(localStorage.getItem('hs_light')==='1') setLight(true); }catch(e){}
 
-/* ========= Disable right-click & common shortcuts ========= */
-document.addEventListener('contextmenu', e => { e.preventDefault(); });
+/* Smooth scroll actions */
+$('#heroExplore').addEventListener('click', ()=> document.getElementById('how').scrollIntoView({behavior:'smooth'}));
+$('#heroHow').addEventListener('click', ()=> document.getElementById('how').scrollIntoView({behavior:'smooth'}));
+$('#ctaBtn') && $('#ctaBtn').addEventListener('click', ()=> document.querySelector('footer').scrollIntoView({behavior:'smooth'}));
 
-document.addEventListener('keydown', function(e){
-  // Block F12
-  if(e.keyCode === 123){ e.preventDefault(); blockAccess('F12'); return false; }
-  // Block Ctrl+Shift+I / J
-  if(e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)){ e.preventDefault(); blockAccess('DevTools'); return false; }
-  // Block Ctrl+U (view source)
-  if(e.ctrlKey && e.keyCode === 85){ e.preventDefault(); blockAccess('ViewSource'); return false; }
-  // Block Ctrl+S, Ctrl+P (save/print)
-  if(e.ctrlKey && (e.key === 's' || e.key === 'p')){ e.preventDefault(); return false; }
+/* ===================
+   Deterrents / Blocking
+   =================== */
+
+/* Console big warning */
+setTimeout(()=> {
+  console.log('%cHackInSeconds — Protected', 'background:#10b981;color:#041018;font-size:20px;padding:6px 12px;border-radius:6px');
+  console.log('%cUnauthorized scraping or copying is prohibited. Server-side protections enforce access.', 'color:#9fb3c9');
+},400);
+
+/* Prevent right click */
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+/* Block common inspect keys */
+document.addEventListener('keydown', e => {
+  // F12
+  if(e.keyCode === 123){ e.preventDefault(); block('F12'); return false; }
+  // Ctrl+Shift+I / J
+  if(e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)){ e.preventDefault(); block('DevTools'); return false; }
+  // Ctrl+U, Ctrl+Shift+C
+  if(e.ctrlKey && (e.keyCode === 85 || (e.shiftKey && e.keyCode === 67))){ e.preventDefault(); block('ViewSource'); return false; }
 });
 
-/* ========= Heuristics: detect headless / automated browsers ========= */
-function isHeadlessOrAutomated(){
+/* Heuristics: detect headless / automated environments */
+function automatedDetected(){
   try {
-    // navigator.webdriver is true in automated browsers
-    if(navigator.webdriver) return true;
-    // headless userAgents / common puppeteer hints
-    const ua = (navigator.userAgent || '').toLowerCase();
-    if(/headless|phantomjs|slimerjs|webdriver|node/.test(ua)) return true;
-    // minimal screen constraints (bot may run with small window)
-    if(window.innerWidth < 300 || window.innerHeight < 200) return true;
-    // detect missing plugins (older heuristic)
-    if(navigator.plugins && navigator.plugins.length === 0 && /chrome/.test(ua)) {
-      // Chrome normally has some plugins — headless often has 0
-      return true;
-    }
-    // further timing checks (slow)
-    return false;
-  } catch(e){ return false; }
+    if(navigator.webdriver) return true; // controlled by automation
+    const ua = (navigator.userAgent||'').toLowerCase();
+    if(/headless|phantomjs|selenium|node|cypress/.test(ua)) return true;
+    if(window.innerWidth < 320 || window.innerHeight < 200) return true;
+    // Chrome plugin heuristic — headless often has no plugins
+    if(navigator.plugins && navigator.plugins.length === 0 && /chrome/.test(ua)) return true;
+  } catch(e){}
+  return false;
 }
 
-/* ========= DevTools open detection (timing trick) ========= */
-let devtoolsOpen = false;
-(function detectDevTools(){
-  const start = performance.now();
-  // tiny loop to measure slowdown if breakpoint is paused
-  for(let i=0;i<100000;i++){ Math.sqrt(i); }
-  const dur = performance.now() - start;
-  // if debugger slows execution massively, assume devtools/breakpoint
-  if(dur > 60) { devtoolsOpen = true; blockAccess('Debugger'); }
-  // also poll occasionally
-  setTimeout(detectDevTools, 3000);
+/* Devtools detection using dimension trick */
+(function devtoolsDetector(){
+  const threshold = 160;
+  let last = {width:window.outerWidth - window.innerWidth, height: window.outerHeight - window.innerHeight};
+  function check(){
+    const diffW = Math.abs((window.outerWidth - window.innerWidth) - last.width);
+    const diffH = Math.abs((window.outerHeight - window.innerHeight) - last.height);
+    last.width = window.outerWidth - window.innerWidth;
+    last.height = window.outerHeight - window.innerHeight;
+    if(last.width > threshold || last.height > threshold) block('DevTools open'); // likely devtools
+  }
+  window.addEventListener('resize', check);
+  setInterval(check, 1000);
 })();
 
-/* ========= Block overlay ========= */
-function blockAccess(reason){
-  try {
-    const ov = $('#blockOverlay');
-    if(!ov) return;
-    ov.style.display = 'flex';
-    console.warn('Access blocked by HackInSeconds. Reason:', reason);
-    // optional: send telemetry to server (can't do here in static file)
-  } catch(e){}
+/* Slow loop timing detection (if paused/step) */
+(function timingCheck(){
+  const t = performance.now();
+  setTimeout(()=> {
+    const delta = performance.now() - t;
+    if(delta > 200) block('Debugger slowdown');
+    setTimeout(timingCheck, 3000);
+  }, 50);
+})();
+
+function block(reason){
+  console.warn('HackInSeconds blocking:', reason);
+  const ov = document.getElementById('blockOverlay');
+  if(ov) ov.style.display = 'flex';
+  // NOTE: In production, signal server: POST /api/alert { reason, ua, ip } (requires server endpoint)
 }
 
-/* Immediately check heuristics */
-if(isHeadlessOrAutomated()) blockAccess('Automated Browser Detected');
+/* Immediate automated check */
+if(automatedDetected()) block('Automated environment detected');
 
+/* Make inline script less copy-friendly (simple obfuscation) */
+(function obf(){
+  // small transformation for core strings — not secure, only increases casual copying cost
+  const s = '/* protected inline */';
+  // place-holder to show we intentionally avoid exposing raw logic
+  // For production use a build-step JS obfuscator (Uglify/Obfuscator)
+})();
 
-// =========================
-// Basic UI actions (scroll to sections)
-// =========================
-$('#navAbout').addEventListener('click', ()=>{ document.getElementById('about').scrollIntoView({behavior:'smooth'}); });
-$('#navProjects').addEventListener('click', ()=>{ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); });
-$('#navTeam').addEventListener('click', ()=>{ document.getElementById('team').scrollIntoView({behavior:'smooth'}); });
-$('#navCTA').addEventListener('click', ()=>{ document.querySelector('.cta').scrollIntoView({behavior:'smooth'}); });
-$('#btnExplore').addEventListener('click', ()=>{ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); });
-$('#btnWhy').addEventListener('click', ()=>{ document.getElementById('why').scrollIntoView({behavior:'smooth'}); });
-$('#btnContact').addEventListener('click', ()=>{ alert('Thank you — for production, use server-side contact form.'); });
+/* Accessibility: keyboard focus visible */
+document.addEventListener('keydown', e => { if(e.key === 'Tab') document.body.classList.add('tabbing'); });
 
-// Small accessibility: focus outlines on keyboard nav
-document.addEventListener('keydown', e => {
-  if(e.key === 'Tab') document.body.classList.add('user-is-tabbing');
-});
-
-// =========================
-// Important Note (visible in page for admins / deployers)
-// =========================
-console.info('HackInSeconds (Client Deterrents): Note that server-side protections (signed URLs, watermarking, WAF, bot detection) are required for robust anti-cloning. See recommended server steps in the comments of this file.');
-
-// =========================
-// Optional: Light obfuscation - remove human-friendly variable names (simple example)
-// (This is intentionally NOT strong obfuscation — for real obfuscation use a build step/obfuscator)
-// =========================
 </script>
-
-<!-- =========================
-     Developer Notes (Visible only in source)
-     - This single-file offers client-side deterrence (UI blocking, disable shortcuts, headless heuristics).
-     - It CANNOT prevent a determined attacker from copying static HTML/CSS/JS.
-     - To make cloning *much harder* implement these server-side:
-        1) Signed (time-limited) URLs for media (images/videos).
-        2) Serve sensitive content only via API endpoints that require session tokens.
-        3) Use watermarking for images and stream media via server (not static files).
-        4) Deploy WAF/CDN (Cloudflare, AWS WAF) with Bot Management and JS challenges.
-        5) Make your Git repository PRIVATE; deploy built artifacts only.
-        6) Log & Monitor suspicious requests (IPs, rates) and block offenders.
-     - If you want, I can generate:
-        A) nginx config + rate-limit rules + Cloudflare rule examples
-        B) PHP signed-url + watermark script for images
-        C) GitHub Actions pipeline to build/minify and deploy only minified assets
-     Save this file as `index.html` and open in browser to preview the landing page.
-   ========================= -->
 
 </body>
 </html>
+
